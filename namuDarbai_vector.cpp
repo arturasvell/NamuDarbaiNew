@@ -49,20 +49,18 @@ public:
 	}
 	void CountFinal()
 	{
-		final = average * 0.4 + 0.6 * examResult;
+		if(medianShow)
+        {
+            final = median * 0.4 + 0.6 * examResult;
+        }
+        else
+        {
+            final = average * 0.4 + 0.6 * examResult;
+        }
 	}
 	void Print()
 	{
-		if (medianShow)
-		{
-			cout << name << "\t" << surname << "\t" <<fixed<<setprecision(2)<< final << "\t" << median << endl;
-		}
-		else
-		{
-			cout.precision(2);
-			cout << name << "\t" << surname << "\t" << fixed << setprecision(2)<< final << "\t" << average << endl;
-		}
-		cout << endl;
+		cout <<"|"<<setw(20)<<name<< "|" <<setw(20)<<surname << "|"<<setw(20) <<fixed<<setprecision(2)<< final << "|" << endl;
 	}
 	Student()
 	{
@@ -187,13 +185,21 @@ int main()
 	}
 	if (medianShow)
 	{
-		cout << "Vardas" << "\t" << "Pavarde" << "\t"<<"Galutinis/ Mediana" << endl;
-		cout << "______________________________________________________________" << endl;
+		cout <<"|"<<setw(20)<<"Vardas"<< "|" <<setw(20)<<"Pavarde" << "|"<<setw(20) << "Galutinis (Mediana)" << "|" << endl;
+		for(int i=0;i<64;i++)
+        {
+            cout<<"-";
+        }
+        cout<<endl;
 	}
 	else
 	{
-		cout << "Vardas" << "\t" << "Pavarde" << "\t" << "Galutinis/ Vidurkis" << endl;
-		cout << "______________________________________________________________" << endl;
+		cout <<"|"<<setw(20)<<"Vardas"<< "|" <<setw(20)<<"Pavarde" << "|"<<setw(20) << "Galutinis (Vidurkis)" << "|" << endl;
+		for(int i=0;i<64;i++)
+        {
+            cout<<"-";
+        }
+        cout<<endl;
 	}
 	for (int i = 0; i < arr.size(); i++)
 	{
@@ -201,3 +207,4 @@ int main()
 	}
 	return 0;
 }
+
