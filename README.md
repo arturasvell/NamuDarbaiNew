@@ -7,6 +7,7 @@
 Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasirinktinai*) bei išveda duomenis į ekraną
 # Releasai
 - **v0.1** Pirmoji programos versija, yra dvi implementacijos: naudojant *C masyvus* ir *std::vector*. Realizuotas paprastas *exception handling*
+- **v0.1.1** Pataisytas *medianos/vidurkio* pasirinkimas, sutvarkytas formatavimas
 
 # Kaip naudotis programa
 - Pasirinkti, ar bus rodoma **mediana** ar **vidurkis**
