@@ -232,7 +232,6 @@ void Program()
 		{
 			return lhs.name < rhs.name;
 		});
-	omp_set_num_threads(8);
 #pragma omp parallel
 	{
 		int i;
