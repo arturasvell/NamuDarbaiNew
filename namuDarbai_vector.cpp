@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 bool medianShow = false;
 class Student
@@ -120,7 +122,7 @@ Student* AddInfo(vector<Student> arr)
                 cout << "Netinkama ivestis" << endl;
                 continue;
             }
-            else if (rezultatas == -1 && student->counter > 0)
+            else if (rezultatas == -1 && student->homework.size() > 0)
             {
                 cin.clear();
                 break;
