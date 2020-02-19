@@ -91,58 +91,81 @@ public:
 Student* AddInfo(vector<Student> arr)
 {
 	bool end = false;
-	string vardas, pavarde;
-	int rezultatas;
-	cout << "Irasykite studento varda ir pavarde" << endl;
-	cin >> vardas >> pavarde;
-	Student* student = new Student(vardas, pavarde);
-	cout << "Irasykite namu darbus: -1 baigia irasymo procesa" << endl;
-	while (true)
-	{
-		cin >> rezultatas;
-		if (rezultatas > 10||rezultatas<-1)
-		{
-			cout << "Netinka. Rezultatas netelpa i pazymio intervala" << endl;
-			continue;
-		}
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore();
-			cout << "Netinkama ivestis" << endl;
-			continue;
-		}
-		else if (rezultatas == -1 && student->homework.size() > 0)
-		{
-			cin.clear();
-			break;
-		}
-		student->AddHomeworkElement(rezultatas);
-	}
-	cout << "Irasykite egzaminu rezultatus" << endl;
-	int rez;
-	while (true)
-	{
-		cin >> rez;
-		if (rez > 10 || rez < 0)
-		{
-			cout << "Netinka. Rezultatas netelpa i pazymio intervala" << endl;
-			continue;
-		}
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore();
-			cout << "Netinkama ivestis" << endl;
-			continue;
-		}
-		else
-		{
-			break;
-		}
-	}
-	student->examResult = rez;
-	return student;
+    string vardas, pavarde;
+    int rezultatas;
+    cout << "Irasykite studento varda ir pavarde" << endl;
+    cin >> vardas >> pavarde;
+    Student* student = new Student(vardas, pavarde);
+    cout<<"Ivesti paciam ar generuoti rezultatus? (p/g)"<<endl;
+    char ats='o';
+    while (ats != 'p' && ats != 'g')
+    {
+        cin >> ats;
+    }
+    if (ats == 'p')
+    {
+        cout << "Irasykite namu darbus: -1 baigia irasymo procesa" << endl;
+        while (true)
+        {
+            cin >> rezultatas;
+            if (rezultatas > 10||rezultatas<-1)
+            {
+                cout << "Netinka. Rezultatas netelpa i pazymio intervala" << endl;
+                continue;
+            }
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore();
+                cout << "Netinkama ivestis" << endl;
+                continue;
+            }
+            else if (rezultatas == -1 && student->counter > 0)
+            {
+                cin.clear();
+                break;
+            }
+            student->AddHomeworkElement(rezultatas);
+        }
+        cout << "Irasykite egzaminu rezultatus" << endl;
+        int rez;
+        while (true)
+        {
+            cin >> rez;
+            if (rez > 10 || rez < 0)
+            {
+                cout << "Netinka. Rezultatas netelpa i pazymio intervala" << endl;
+                continue;
+            }
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore();
+                cout << "Netinkama ivestis" << endl;
+                continue;
+            }
+            else
+            {
+                break;
+            }
+        }
+        student->examResult = rez;
+    }
+    else if (ats == 'g')
+    {
+        int n;
+        srand(time(NULL));
+        n=rand()%10;
+        for(int i=0;i<n;i++)
+        {
+            int rezultatas=rand()%11;
+            student->AddHomeworkElement(rezultatas);
+        }
+        rezultatas=rand()%11;
+        student->examResult=rezultatas;
+    }
+
+    return student;
 }
 int main()
 {
