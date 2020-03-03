@@ -208,7 +208,7 @@ void GenerationAlgorithm(int amountToGenerate, int counter) ///prielaida, kad co
 		fr << "ND" + ConvertIntToString(i) << " ";
 	}
 	fr << "Egz" << endl;
-	omp_set_num_threads(4);
+	//omp_set_num_threads(4);
 #pragma omp parallel for
 	{
 		for (int i = 0; i < amountToGenerate; i++)
