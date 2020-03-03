@@ -29,5 +29,5 @@ Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasir
 - Paleisti makefile su komanda **make**
 - Enjoy
 # Programos kompiliavimo gidas (WINDOWS - CODEBLOCKS)
-- Sukompiliuoti programą, paleidus CBP failą
+- Sukompiliuoti programą, paleidus CBP failą (su c++14 standartu)
 -Enjoy
