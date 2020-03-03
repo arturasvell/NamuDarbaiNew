@@ -6,8 +6,10 @@
 #include <fstream>
 #include <omp.h>
 #include <algorithm>
+#include <sstream>
+#include <chrono>
 using namespace std;
-static bool medianShow=false;
+static bool medianShow = false;
 static const int threadNum = 4;
 class Student
 {
@@ -79,7 +81,12 @@ public:
 Student* AddInfo(vector<Student> arr);
 bool ReturnMedianQuestion();
 bool ReturnFileReadQuestion();
-void SortArray(vector<Student>& arr);
 void Program();
+void GenerationAlgorithm(int amountToGenerate, int counter);
+void GenerateTxtFiles(int amountOfFiles);
+string ConvertIntToString(int toConvert);
+void ReadFile(vector<Student> &arr);
+void PrintElements(vector<Student> best, vector<Student> worst);
+void SortElements(vector<Student> arr, vector<Student> &best, vector<Student> &worst);
 #endif // LOGIC_H
 
