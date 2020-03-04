@@ -19,49 +19,14 @@ public:
 	string Name() { return name; }
 	string Surname() { return surname; }
 	double final;
-	double CountAverage(vector<int> homework)
-	{
-		double sum = 0, average;
-		for (int i = 0; i < homework.size(); i++)
-		{
-			sum += (double)homework[i];
-		}
-		average = (double)sum / (double)homework.size();
-		return average;
-	}
-	double CountMedian(vector<int> homework)
-	{
-		double median;
-		for (int i = 0; i < homework.size(); i++)
-		{
-			for (int j = i + 1; j < homework.size(); j++)
-			{
-				if (homework[i] > homework[j])
-				{
-					int temp = homework[i];
-					homework[i] = homework[j];
-					homework[j] = temp;
-				}
-			}
-		}
-		if (homework.size() % 2 != 0)
-		{
-			median = homework[homework.size() / 2];
-		}
-		else
-		{
-			median = (double)homework[homework.size() / 2] + homework[homework.size() / 2 - 1];
-		}
-		return median;
-	}
-	void CountFinal(double data, double examResult)
-	{
-		final = data * 0.4 + 0.6 * examResult;
-	}
-	void Print()
-	{
-		cout << "|" << setw(20) << name << "|" << setw(20) << surname << "|" << setw(20) << fixed << setprecision(2) << final << "|" << endl;
-	}
+	double CountAverage(vector<int> homework);
+
+	double CountMedian(vector<int> homework);
+
+	void CountFinal(double data, double examResult);
+
+	void Print();
+
 	Student()
 	{
 		name = "Vardenis";
@@ -85,8 +50,9 @@ void Program();
 void GenerationAlgorithm(int amountToGenerate, int counter);
 void GenerateTxtFiles(int amountOfFiles);
 string ConvertIntToString(int toConvert);
-void ReadFile(vector<Student> &arr);
+void ReadFile(vector<Student> &arr, string fileName);
 void PrintElements(vector<Student> best, vector<Student> worst);
 void SortElements(vector<Student> arr, vector<Student> &best, vector<Student> &worst);
+void SortByName(vector<Student> &arr);
 #endif // LOGIC_H
 
