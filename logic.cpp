@@ -1,5 +1,5 @@
 #include "logic.h"
-Student* AddInfo(list<Student> arr)
+Student* AddInfo(deque<Student> arr)
 {
 	vector<int> homework;
 	int examResult;
@@ -169,7 +169,7 @@ void Program()
 			break;
 		}
 	}
-	list<Student> arr, best;
+	deque<Student> arr, best;
 	medianShow = false;
 	int counter = 1000;
 	for (int i = 0; i < n; i++)
@@ -186,8 +186,8 @@ void Program()
 		SortByName(arr);
 		SortByName(best);
 		PrintElements(arr, best);
-		list<Student>().swap(arr);
-		list<Student>().swap(best);
+		deque<Student>().swap(arr);
+		deque<Student>().swap(best);
 		auto end = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> diff = end - start;
 		cout << endl << counter << " dydzio vektoriaus testavimas uztruko " << diff.count() << " sekundziu\n";
@@ -197,25 +197,23 @@ void Program()
 		counter *= 10;
 	}
 }
-void SortByResults(list<Student>& arr)
+void SortByResults(deque<Student>& arr)
 {
 	auto start = std::chrono::high_resolution_clock::now();
-	arr.sort([](const Student& player1, const Student& player2)
+	sort(arr.begin(), arr.end(), [](const auto& lhs, const auto& rhs)
 		{
-			return player1.final < player2.final;
+			return lhs.final < rhs.final;
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
 	cout << arr.size() << " dydzio vektoriaus rusiavimas pagal rezultatus uztruko " << diff.count() << " sekundziu\n";
 }
-void SortByName(list<Student>& arr)
+void SortByName(deque<Student>& arr)
 {
 	auto start = std::chrono::high_resolution_clock::now();
-	arr.sort([](const Student& player1, const Student& player2)
+	sort(arr.begin(), arr.end(), [](const auto& lhs, const auto& rhs)
 		{
-			if (player1.name == player2.name)
-				return player1.surname < player2.surname;
-			return player1.name < player2.name;
+			return lhs.name < rhs.name;
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
@@ -262,7 +260,7 @@ string ConvertIntToString(int toConvert)
 	result = convert.str();
 	return result;
 }
-void ReadFile(list<Student>& arr, string fileName)
+void ReadFile(deque<Student>& arr, string fileName)
 {
 	try
 	{
@@ -327,12 +325,12 @@ void ReadFile(list<Student>& arr, string fileName)
 		return;
 	}
 }
-void PrintElements(list<Student> arr, list<Student> best)
+void PrintElements(deque<Student> arr, deque<Student> best)
 {
 	auto start = std::chrono::high_resolution_clock::now();
 	ofstream fr("galvociai" + ConvertIntToString(best.size()) + ".txt");
 	int i;
-	for (list<Student>::iterator i = best.begin(); i != best.end(); i++)
+	for (deque<Student>::iterator i = best.begin(); i != best.end(); i++)
 	{
 		fr << "|" << setw(20) << (*i).name << "|" << setw(20) << (*i).surname << "|" <<
 			setw(20) << fixed << setprecision(2) << (*i).final << "|" << endl;
@@ -343,7 +341,7 @@ void PrintElements(list<Student> arr, list<Student> best)
 	cout << "Galvociu rasymas i faila uztruko " << diff.count() << " sekundziu\n";
 	start = std::chrono::high_resolution_clock::now();
 	ofstream fr2("nuskriaustieji" + ConvertIntToString(arr.size()) + ".txt");
-	for (list<Student>::iterator i = arr.begin(); i != arr.end(); i++)
+	for (deque<Student>::iterator i = arr.begin(); i != arr.end(); i++)
 	{
 		fr2 << "|" << setw(20) << (*i).name << "|" << setw(20) << (*i).surname << "|" <<
 			setw(20) << fixed << setprecision(2) << (*i).final << "|" << endl;
@@ -353,12 +351,12 @@ void PrintElements(list<Student> arr, list<Student> best)
 	diff = end - start;
 	cout << "Nuskriaustuju rasymas i faila uztruko " << diff.count() << " sekundziu\n";
 }
-void SortElements(list<Student>& arr, list<Student>& best)
+void SortElements(deque<Student>& arr, deque<Student>& best)
 {
 	auto start = std::chrono::high_resolution_clock::now();
 	int index=0;
 	SortByResults(arr);
-	for (list<Student>::iterator i = arr.begin(); i != arr.end(); i++)
+	for (deque<Student>::iterator i = arr.begin(); i != arr.end(); i++)
 	{
 		index++;
 		if ((*i).final >= 5.0f)
@@ -366,7 +364,7 @@ void SortElements(list<Student>& arr, list<Student>& best)
 			break;
 		}
 	}
-	list<Student>::iterator i = arr.begin();
+	deque<Student>::iterator i = arr.begin();
 	advance(i, index);
 	for (i; i != arr.end(); i++)
 	{
