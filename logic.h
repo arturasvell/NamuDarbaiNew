@@ -9,7 +9,9 @@
 #include <chrono>
 #include <list>
 #include <algorithm>
+#include <deque>
 using namespace std;
+using std::cout;
 static bool medianShow = false;
 static const int threadNum = 4;
 class Student
@@ -43,17 +45,21 @@ public:
 		this->name = name;
 		this->surname = surname;
 	}
+	bool operator ()(Student const& a, Student const& b) const
+	{
+		return a.final < b.final;
+	}
 };
-Student* AddInfo(list<Student> arr);
+Student* AddInfo(deque<Student> arr);
 bool ReturnMedianQuestion();
 bool ReturnFileReadQuestion();
 void Program();
 void GenerationAlgorithm(int amountToGenerate, int counter);
 void GenerateTxtFiles(int amountOfFiles);
 string ConvertIntToString(int toConvert);
-void ReadFile(list<Student>& arr, string fileName);
-void PrintElements(list<Student> arr, list<Student> best);
-void SortElements(list<Student>& arr, list<Student>& best);
-void SortByName(list<Student>& arr);
-void SortByResults(list<Student>& arr);
+void ReadFile(deque<Student>& arr, string fileName);
+void PrintElements(deque<Student> arr, deque<Student> best);
+void SortElements(deque<Student>& arr, deque<Student>& best);
+void SortByName(deque<Student>& arr);
+void SortByResults(deque<Student>& arr);
 #endif // LOGIC_H
