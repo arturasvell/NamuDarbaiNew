@@ -1,5 +1,5 @@
 #include "logic.h"
-Student* AddInfo(vector<Student> arr)
+Student* AddInfo(list<Student> arr)
 {
 	vector<int> homework;
 	int examResult;
@@ -169,7 +169,7 @@ void Program()
 			break;
 		}
 	}
-	vector<Student> arr, best;
+	list<Student> arr, best;
 	medianShow = false;
 	int counter = 1000;
 	for (int i = 0; i < n; i++)
@@ -179,43 +179,43 @@ void Program()
 		{
 			GenerationAlgorithm(counter, 5);
 		}
-		arr.reserve(counter);
+		//arr.reserve(counter);
 		ReadFile(arr, "kursiokai" + ConvertIntToString(counter));
-		
+		//SortByResults(arr);
 		SortElements(arr, best);
 		SortByName(arr);
 		SortByName(best);
 		PrintElements(arr, best);
-		vector<Student>().swap(arr);
-		vector<Student>().swap(best);
+		list<Student>().swap(arr);
+		list<Student>().swap(best);
 		auto end = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> diff = end - start;
 		cout << endl << counter << " dydzio vektoriaus testavimas uztruko " << diff.count() << " sekundziu\n";
 		cout << "-----------------------------\n";
 		arr.clear();
-		arr.shrink_to_fit();
 		best.clear();
-		best.shrink_to_fit();
 		counter *= 10;
 	}
 }
-void SortByResults(vector<Student>& arr)
+void SortByResults(list<Student>& arr)
 {
 	auto start = std::chrono::high_resolution_clock::now();
-	sort(arr.begin(), arr.end(), [](const auto& lhs, const auto& rhs)
+	arr.sort([](const Student& player1, const Student& player2)
 		{
-			return lhs.final < rhs.final;
+			return player1.final < player2.final;
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
 	cout << arr.size() << " dydzio vektoriaus rusiavimas pagal rezultatus uztruko " << diff.count() << " sekundziu\n";
 }
-void SortByName(vector<Student>& arr)
+void SortByName(list<Student>& arr)
 {
 	auto start = std::chrono::high_resolution_clock::now();
-	sort(arr.begin(), arr.end(), [](const auto& lhs, const auto& rhs)
+	arr.sort([](const Student& player1, const Student& player2)
 		{
-			return lhs.name < rhs.name;
+			if (player1.name == player2.name)
+				return player1.surname < player2.surname;
+			return player1.name < player2.name;
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
@@ -262,7 +262,7 @@ string ConvertIntToString(int toConvert)
 	result = convert.str();
 	return result;
 }
-void ReadFile(vector<Student>& arr, string fileName)
+void ReadFile(list<Student>& arr, string fileName)
 {
 	try
 	{
@@ -327,15 +327,15 @@ void ReadFile(vector<Student>& arr, string fileName)
 		return;
 	}
 }
-void PrintElements(vector<Student> arr, vector<Student> best)
+void PrintElements(list<Student> arr, list<Student> best)
 {
 	auto start = std::chrono::high_resolution_clock::now();
 	ofstream fr("galvociai" + ConvertIntToString(best.size()) + ".txt");
 	int i;
-	for (i = 0; i < best.size(); i++)
+	for (list<Student>::iterator i = best.begin(); i != best.end(); i++)
 	{
-		fr << "|" << setw(20) << best[i].name << "|" << setw(20) << best[i].surname << "|" <<
-			setw(20) << fixed << setprecision(2) << best[i].final << "|" << endl;
+		fr << "|" << setw(20) << (*i).name << "|" << setw(20) << (*i).surname << "|" <<
+			setw(20) << fixed << setprecision(2) << (*i).final << "|" << endl;
 	}
 	fr.close();
 	auto end = std::chrono::high_resolution_clock::now();
@@ -343,34 +343,37 @@ void PrintElements(vector<Student> arr, vector<Student> best)
 	cout << "Galvociu rasymas i faila uztruko " << diff.count() << " sekundziu\n";
 	start = std::chrono::high_resolution_clock::now();
 	ofstream fr2("nuskriaustieji" + ConvertIntToString(arr.size()) + ".txt");
-	for (i = 0; i < arr.size(); i++)
+	for (list<Student>::iterator i = arr.begin(); i != arr.end(); i++)
 	{
-		fr2 << "|" << setw(20) << arr[i].name << "|" << setw(20) << arr[i].surname << "|" <<
-			setw(20) << fixed << setprecision(2) << arr[i].final << "|" << endl;
+		fr2 << "|" << setw(20) << (*i).name << "|" << setw(20) << (*i).surname << "|" <<
+			setw(20) << fixed << setprecision(2) << (*i).final << "|" << endl;
 	}
 	fr2.close();
 	end = std::chrono::high_resolution_clock::now();
 	diff = end - start;
 	cout << "Nuskriaustuju rasymas i faila uztruko " << diff.count() << " sekundziu\n";
 }
-void SortElements(vector<Student>& arr, vector<Student>& best)
+void SortElements(list<Student>& arr, list<Student>& best)
 {
 	auto start = std::chrono::high_resolution_clock::now();
 	int index=0;
 	SortByResults(arr);
-	for (int i = 0; i < arr.size(); i++)
+	for (list<Student>::iterator i = arr.begin(); i != arr.end(); i++)
 	{
-		if (arr[i].final >= 5.0f)
+		index++;
+		if ((*i).final >= 5.0f)
 		{
-			index = i;
 			break;
 		}
 	}
-	for (int i = index; i < arr.size(); i++)
+	list<Student>::iterator i = arr.begin();
+	advance(i, index);
+	for (i; i != arr.end(); i++)
 	{
-		best.push_back(arr[i]);
+		best.push_back(*i);
 	}
-	arr.resize(index + 1);
+	//index++;
+	arr.resize(index);
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
 	cout << "Vektoriaus skaidymas i du uztruko " << diff.count() << " sekundziu\n";
