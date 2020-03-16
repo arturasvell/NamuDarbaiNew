@@ -50,9 +50,9 @@ void Program();
 void GenerationAlgorithm(int amountToGenerate, int counter);
 void GenerateTxtFiles(int amountOfFiles);
 string ConvertIntToString(int toConvert);
-void ReadFile(vector<Student> &arr, string fileName);
-void PrintElements(vector<Student> best, vector<Student> worst);
-void SortElements(vector<Student> arr, vector<Student> &best, vector<Student> &worst);
-void SortByName(vector<Student> &arr);
+void ReadFile(vector<Student>& arr, string fileName);
+void PrintElements(vector<Student> arr, vector<Student> best);
+void SortElements(vector<Student>& arr, vector<Student>& best);
+void SortByName(vector<Student>& arr);
+void SortByResults(vector<Student>& arr);
 #endif // LOGIC_H
-
