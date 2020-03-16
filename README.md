@@ -12,7 +12,7 @@ Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasir
 - **v0.2** Pridėta galimybė nuskaityti duomenis iš failo, duomenys rūšiuojami pagal studentų vardą ir pavardę, kodas išskaidytas į tris failus (*logic.cpp, logic.h ir main.cpp*), pridėtas paprastas *exception handling*
 - **v0.3** Pridėtas failų generavimas, rezultatų rikiavimas į "galvočius" ir "nuskriaustuosius" pagal galutinį balą, failo pavadinimo pasirinkimas, kelių failų nuskaitymas
 - **v0.4.1** Pridėtas benchmarking - kiekvieno failo generavimas, rūšiavimas, spausdinimas ir kiekvieno šio proceso trukmės skaičiavimas
-- **0.5** Ištestuota programos sparta su vektoriais
+- **v0.5** Ištestuota programos sparta su vektoriais
 
 # Kaip naudotis programa
 - Pasirinkti, ar generuoti failus, ar skaityti esamus failus
