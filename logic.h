@@ -5,9 +5,10 @@
 #include <vector>
 #include <fstream>
 #include <omp.h>
-#include <algorithm>
 #include <sstream>
 #include <chrono>
+#include <list>
+#include <algorithm>
 using namespace std;
 static bool medianShow = false;
 static const int threadNum = 4;
@@ -43,16 +44,16 @@ public:
 		this->surname = surname;
 	}
 };
-Student* AddInfo(vector<Student> arr);
+Student* AddInfo(list<Student> arr);
 bool ReturnMedianQuestion();
 bool ReturnFileReadQuestion();
 void Program();
 void GenerationAlgorithm(int amountToGenerate, int counter);
 void GenerateTxtFiles(int amountOfFiles);
 string ConvertIntToString(int toConvert);
-void ReadFile(vector<Student>& arr, string fileName);
-void PrintElements(vector<Student> arr, vector<Student> best);
-void SortElements(vector<Student>& arr, vector<Student>& best);
-void SortByName(vector<Student>& arr);
-void SortByResults(vector<Student>& arr);
+void ReadFile(list<Student>& arr, string fileName);
+void PrintElements(list<Student> arr, list<Student> best);
+void SortElements(list<Student>& arr, list<Student>& best);
+void SortByName(list<Student>& arr);
+void SortByResults(list<Student>& arr);
 #endif // LOGIC_H
