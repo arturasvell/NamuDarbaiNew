@@ -12,19 +12,12 @@ Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasir
 - **v0.2** Pridėta galimybė nuskaityti duomenis iš failo, duomenys rūšiuojami pagal studentų vardą ir pavardę, kodas išskaidytas į tris failus (*logic.cpp, logic.h ir main.cpp*), pridėtas paprastas *exception handling*
 - **v0.3** Pridėtas failų generavimas, rezultatų rikiavimas į "galvočius" ir "nuskriaustuosius" pagal galutinį balą, failo pavadinimo pasirinkimas, kelių failų nuskaitymas
 - **v0.4.1** Pridėtas benchmarking - kiekvieno failo generavimas, rūšiavimas, spausdinimas ir kiekvieno šio proceso trukmės skaičiavimas
+- **0.5** Ištestuota programos sparta su vektoriais
 
 # Kaip naudotis programa
-- Palaukti, kol susigeneruos tekstiniai failai
-- Pasirinkti, ar bus rodoma **mediana** ar **vidurkis**
-- Pasirinkti įvesties metodą: **rankomis** ar **nuskaityti iš failo**
-**Jeigu pasirinktas įvedimas rankomis:**
-- Įvesti studento vardą ir pavardę
-- **Vesti** namų darbų rezultatus (*-1 įvedimas stabdo ciklą*) arba juos **generuoti**
-- Įvesti egzamino rezultatą
-- Pasirinkti, ar tęsti įvedimą
-**Jeigu pasirinktas failo nuskaitymas**
-- Įvesti tekstinio failo pavadinimą
-- Pasirinkti, ar toliau nuskaitinėti duomenis
+- Pasirinkti, ar generuoti failus, ar skaityti esamus failus
+- Pasirinkti, kiek failų skaityti
+- Laukti
 
 # Programos kompiliavimo gidas (LINUX)
 - Paleisti makefile su komanda **make**
