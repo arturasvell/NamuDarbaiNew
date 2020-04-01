@@ -180,7 +180,7 @@ void Program()
 			GenerationAlgorithm(counter, 5);
 		}
 		//arr.reserve(counter);
-		ReadFile(arr, "kursiokai" + ConvertIntToString(counter));
+		bufer_nusk("kursiokai" + ConvertIntToString(counter),arr);
 		//SortByResults(arr);
 		SortElements(arr, best);
 		SortByName(arr);
@@ -221,6 +221,7 @@ void SortByName(deque<Student>& arr)
 }
 void GenerationAlgorithm(int amountToGenerate, int counter) ///prielaida, kad counter <10
 {
+	auto start = std::chrono::high_resolution_clock::now();
 	ofstream fr("kursiokai" + ConvertIntToString(amountToGenerate) + ".txt");
 	int fieldAmount = counter;
 	fr << "Vardas Pavarde" << " ";
@@ -229,7 +230,7 @@ void GenerationAlgorithm(int amountToGenerate, int counter) ///prielaida, kad co
 		fr << "ND" + ConvertIntToString(i) << " ";
 	}
 	fr << "Egz" << endl;
-		for (int i = 0; i < amountToGenerate - 1; i++)
+		for (int i = 0; i < amountToGenerate-1; i++)
 		{
 			fr << "Vardas" + ConvertIntToString(i) << " " << "Pavarde" + ConvertIntToString(i) << " ";
 			for (int j = 0; j < fieldAmount; j++)
@@ -240,6 +241,8 @@ void GenerationAlgorithm(int amountToGenerate, int counter) ///prielaida, kad co
 		}
 		fr.clear();
 	fr.close();
+	std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start; // Skirtumas (s)
+	std::cout << "Failo generavimas uztruko: " << diff.count() << " s\n";
 }
 void GenerateTxtFiles(int amountOfFiles)
 {
@@ -259,71 +262,6 @@ string ConvertIntToString(int toConvert)
 	convert << toConvert;
 	result = convert.str();
 	return result;
-}
-void ReadFile(deque<Student>& arr, string fileName)
-{
-	try
-	{
-		ifstream read(fileName + ".txt");
-		auto start = std::chrono::high_resolution_clock::now();
-		string parameter;
-		read >> parameter >> ws >> parameter;
-		int n = 0;
-		while (parameter != "Egzaminas" && read.is_open())
-		{
-			read >> ws >> parameter;
-
-			if (parameter[0] == 'E')
-			{
-				break;
-			}
-			n++;
-		}
-
-		string vardas, pavarde;
-		int homeworkElement, examResult;
-		Student* studentas = new Student();
-		vector<int> homework;
-		while (!read.eof())
-		{
-			
-			read >> vardas >> pavarde;
-			studentas->name = vardas;
-			studentas->surname = pavarde;
-			for (int i = 0; i < n; i++)
-			{
-				read >> homeworkElement;
-				homework.push_back(homeworkElement);
-			}
-			read >> homeworkElement;
-			examResult = homeworkElement;
-			if (medianShow)
-			{
-				double median = studentas->CountMedian(homework);
-				studentas->CountFinal(median, examResult);
-			}
-			else
-			{
-				double average = studentas->CountAverage(homework);
-				studentas->CountFinal(average, examResult);
-			}
-			vector<int>().swap(homework);
-			arr.push_back(*studentas);
-		}
-		homework.clear();
-		homework.shrink_to_fit();
-		delete studentas;
-		read.clear();
-		read.close();
-		auto end = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> diff = end - start;
-		cout << "Failo " << fileName + ".txt" << " skaitymas uztruko " << diff.count() << " sekundziu\n";
-	}
-	catch (const std::exception & e)
-	{
-		cerr << e.what() << endl;
-		return;
-	}
 }
 void PrintElements(deque<Student> arr, deque<Student> best)
 {
@@ -418,4 +356,81 @@ double Student::CountAverage(vector<int> homework)
 	}
 	average = (double)sum / (double)homework.size();
 	return average;
+}
+void bufer_nusk(std::string read_vardas, deque<Student>& arr)
+{
+	try
+	{
+		auto start = std::chrono::high_resolution_clock::now();
+		int homeworkElement, examResult;
+		Student* studentas = new Student();
+		vector<int> homework;
+		std::vector<std::string> splited;
+		std::string eil;
+		std::stringstream my_buffer;
+		std::ifstream open_f(read_vardas + ".txt");
+		my_buffer << open_f.rdbuf();
+		open_f.close();
+
+		start = std::chrono::high_resolution_clock::now();
+		while (my_buffer) {
+			if (!my_buffer.eof()) {
+				std::getline(my_buffer, eil);
+				splited.push_back(eil);
+			}
+			else break;
+		}
+
+		start = std::chrono::high_resolution_clock::now();
+		std::string outputas = "";
+		for (std::string& a : splited) (a.compare(*splited.rbegin()) != 0) ? outputas += a + "\n" : outputas += a;
+		splited.clear();
+		istringstream data;
+		data.str(outputas);
+		string parameter;
+		data >> parameter >> ws >> parameter;
+		int n = 0;
+		while (parameter != "Egzaminas" && !data.eof())
+		{
+			data >> ws >> parameter;
+
+			if (parameter[0] == 'E')
+			{
+				break;
+			}
+			n++;
+		}
+		while (!data.eof())
+		{
+			data >> studentas->name >> studentas->surname;
+			for (int i = 0; i < n; i++)
+			{
+				data >> homeworkElement;
+				homework.push_back(homeworkElement);
+			}
+			data >> examResult;
+			if (medianShow)
+			{
+				double median = studentas->CountMedian(homework);
+				studentas->CountFinal(median, examResult);
+			}
+			else
+			{
+				double average = studentas->CountAverage(homework);
+				studentas->CountFinal(average, examResult);
+			}
+			vector<int>().swap(homework);
+			arr.push_back(*studentas);
+		}
+		cout << arr.size() << endl;
+		data.clear();
+		std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start; // Skirtumas (s)
+		std::cout << "Failo nuskaitymas uztruko: " << diff.count() << " s\n";
+	}
+	catch (const std::exception& e)
+	{
+		cerr << e.what() << endl;
+		return;
+	}
+	
 }
