@@ -15,6 +15,7 @@ Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasir
 - **v0.5** Ištestuota programos sparta su vektoriais
 - **v0.5.1** Ištestuota programos sparta su listais
 - **v0.5.2** Ištestuota programos sparta su deque
+- **v1.0** Optimizuotas skaitymas, testuojamas deque su dviem konteineriais
 
 **REZULTATAI**
 *Failų skaitymas*
