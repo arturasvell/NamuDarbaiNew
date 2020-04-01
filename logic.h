@@ -10,6 +10,7 @@
 #include <list>
 #include <algorithm>
 #include <deque>
+#include <sstream>
 using namespace std;
 using std::cout;
 static bool medianShow = false;
@@ -57,9 +58,9 @@ void Program();
 void GenerationAlgorithm(int amountToGenerate, int counter);
 void GenerateTxtFiles(int amountOfFiles);
 string ConvertIntToString(int toConvert);
-void ReadFile(deque<Student>& arr, string fileName);
 void PrintElements(deque<Student> arr, deque<Student> best);
 void SortElements(deque<Student>& arr, deque<Student>& best);
 void SortByName(deque<Student>& arr);
 void SortByResults(deque<Student>& arr);
+void bufer_nusk(std::string read_vardas, deque<Student>& arr);
 #endif // LOGIC_H
