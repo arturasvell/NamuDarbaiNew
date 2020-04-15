@@ -13,6 +13,7 @@
 #include <sstream>
 #include <list>
 #include <vector>
+#include <cmath>
 using namespace std;
 using std::cout;
 static bool medianShow = false;
