@@ -1,4 +1,5 @@
 #include "logic.h"
+bool MODE = false;
 Student* AddInfo(deque<Student> arr)
 {
 	vector<int> homework;
@@ -170,6 +171,52 @@ void Program()
 			break;
 		}
 	}
+	cout<<"Pasirinkite konteinerio tipa:\nv - vector\nl-list\nd-deque\n";
+    while (true)
+	{
+		cin >> ans;
+		if (ans == 'v')
+		{
+			program=VECTOR;
+			break;
+		}
+		else if (ans == 'l')
+		{
+			program=LIST;
+			break;
+		}
+		else if(ans=='d')
+        {
+            program=DEQUE;
+            break;
+        }
+		else
+		{
+			cout << "Netinkama ivestis\n";
+		}
+	}
+	cout<<"Pasirinkite rusiavimo buda:\n1 - du konteineriai\n2- trys konteineriai\n";
+    while (true)
+	{
+		cin >> answ;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+			cout << "Netinkama ivestis" << endl;
+			continue;
+		}
+		if (answ==1)
+		{
+			MODE=true;
+			break;
+		}
+		else if(answ==2)
+		{
+			MODE=false;
+			break;
+		}
+	}
 	vector<Student> arr, best, worst;
 	deque<Student> arr2, best2, worst2;
 	list<Student> arr3, best3,worst3;
@@ -188,8 +235,15 @@ void Program()
 			bufer_nusk1("kursiokai" + ConvertIntToString(counter), arr);
 			//SortByResults(arr);
 			SortElements1(arr, best, worst);
-			SortByName1(arr);
+			if(MODE)
+            {
+                SortByName1(arr);
+            }
 			SortByName1(best);
+			if(!MODE)
+            {
+                SortByName1(worst);
+            }
 			PrintElements1(arr, best);
 			vector<Student>().swap(arr);
 			vector<Student>().swap(best);
@@ -215,8 +269,15 @@ void Program()
 			bufer_nusk("kursiokai" + ConvertIntToString(counter), arr2);
 			//SortByResults(arr);
 			SortElements(arr2, best2,worst2);
-			SortByName(arr2);
+			if(MODE)
+            {
+                SortByName(arr2);
+            }
 			SortByName(best2);
+			if(!MODE)
+            {
+                SortByName(worst2);
+            }
 			PrintElements(arr2, best2);
 			deque<Student>().swap(arr2);
 			deque<Student>().swap(arr2);
@@ -242,8 +303,16 @@ void Program()
 			bufer_nusk2("kursiokai" + ConvertIntToString(counter), arr3);
 			//SortByResults(arr);
 			SortElements2(arr3, best3,worst3);
-			SortByName2(arr3);
+			if(MODE)
+            {
+                SortByName2(arr3);
+            }
+
 			SortByName2(best3);
+			if(!MODE)
+            {
+                SortByName2(worst3);
+            }
 			PrintElements2(arr3, best3);
 			list<Student>().swap(arr3);
 			list<Student>().swap(arr3);
@@ -256,7 +325,7 @@ void Program()
 			counter *= 10;
 		}
 	}
-	
+
 }
 void SortByResults(deque<Student>& arr)
 {
@@ -267,7 +336,7 @@ void SortByResults(deque<Student>& arr)
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
-	cout << arr.size() << " dydzio vektoriaus rusiavimas pagal rezultatus uztruko " << diff.count() << " sekundziu\n";
+	cout << arr.size() << " dydzio deque rusiavimas pagal rezultatus uztruko " << diff.count() << " sekundziu\n";
 }
 void SortByName(deque<Student>& arr)
 {
@@ -278,7 +347,7 @@ void SortByName(deque<Student>& arr)
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
-	cout << arr.size() << " dydzio vektoriaus rusiavimas pagal vardus uztruko " << diff.count() << " sekundziu\n";
+	cout << arr.size() << " dydzio deque rusiavimas pagal vardus uztruko " << diff.count() << " sekundziu\n";
 }
 void GenerationAlgorithm(int amountToGenerate, int counter) ///prielaida, kad counter <10
 {
@@ -353,9 +422,10 @@ void PrintElements(deque<Student> arr, deque<Student> best)
 void SortElements(deque<Student>& arr, deque<Student>& best, deque<Student>& worst)
 {
 	auto start = std::chrono::high_resolution_clock::now();
-	bool MODE = false;
+
 	if (MODE)
 	{
+		cout<<"Naudojama dvieju deque strategija"<<endl;
 		int index = 0;
 		SortByResults(arr);
 		for (deque<Student>::iterator i = arr.begin(); i != arr.end(); i++)
@@ -377,6 +447,7 @@ void SortElements(deque<Student>& arr, deque<Student>& best, deque<Student>& wor
 	}
 	else
 	{
+		cout<<"Naudojama triju deque strategija"<<endl;
 		for (deque<Student>::iterator i = arr.begin(); i != arr.end(); i++)
 		{
 			if ((*i).final >= 5.0f)
@@ -392,7 +463,7 @@ void SortElements(deque<Student>& arr, deque<Student>& best, deque<Student>& wor
 
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
-	cout << "Listo skaidymas i du uztruko " << diff.count() << " sekundziu\n";
+	cout << "Deque skaidymas i du uztruko " << diff.count() << " sekundziu\n";
 }
 double Student::CountMedian(vector<int> homework)
 {
@@ -512,7 +583,7 @@ void bufer_nusk(std::string read_vardas, deque<Student>& arr)
 		cerr << e.what() << endl;
 		return;
 	}
-	
+
 }
 Student* AddInfo1(vector<Student> arr)
 {
@@ -634,9 +705,9 @@ void SortElements1(vector<Student>& arr, vector<Student>& best, vector<Student>&
 {
 	auto start = std::chrono::high_resolution_clock::now();
 	bool sortingMethod = false;
-	bool MODE = false;
 	if (MODE)
 	{
+		cout<<"Naudojama dvieju vektoriu strategija"<<endl;
 		int index = 0;
 		SortByResults1(arr);
 		for (vector<Student>::iterator i = arr.begin(); i != arr.end(); i++)
@@ -658,6 +729,7 @@ void SortElements1(vector<Student>& arr, vector<Student>& best, vector<Student>&
 	}
 	else
 	{
+		cout<<"Naudojama triju vektoriu strategija"<<endl;
 		for (int i = 0; i < arr.size(); i++)
 		{
 			if (arr[i].final >= 5.0f)
@@ -891,9 +963,9 @@ void PrintElements2(list<Student> arr, list<Student> best)
 void SortElements2(list<Student>& arr, list<Student>& best, list<Student>& worst)
 {
 	auto start = std::chrono::high_resolution_clock::now();
-	bool MODE = false;
 	if (MODE)
 	{
+        cout<<"Naudojama dvieju listu strategija"<<endl;
 		int index = 0;
 		SortByResults2(arr);
 		for (list<Student>::iterator i = arr.begin(); i != arr.end(); i++)
@@ -915,6 +987,7 @@ void SortElements2(list<Student>& arr, list<Student>& best, list<Student>& worst
 	}
 	else
 	{
+		cout<<"Naudojama triju listu strategija"<<endl;
 		for (list<Student>::iterator i=arr.begin();i!=arr.end();i++)
 		{
 			if ((*i).final >= 5.0f)
@@ -927,7 +1000,7 @@ void SortElements2(list<Student>& arr, list<Student>& best, list<Student>& worst
 			}
 		}
 	}
-	
+
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
 	cout << "Listo skaidymas i du uztruko " << diff.count() << " sekundziu\n";
@@ -943,7 +1016,7 @@ void SortByName2(list<Student>& arr)
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
-	cout << arr.size() << " dydzio vektoriaus rusiavimas pagal vardus uztruko " << diff.count() << " sekundziu\n";
+	cout << arr.size() << " dydzio listo rusiavimas pagal vardus uztruko " << diff.count() << " sekundziu\n";
 }
 void SortByResults2(list<Student>& arr)
 {
@@ -954,7 +1027,7 @@ void SortByResults2(list<Student>& arr)
 		});
 	auto end = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> diff = end - start;
-	cout << arr.size() << " dydzio vektoriaus rusiavimas pagal rezultatus uztruko " << diff.count() << " sekundziu\n";
+	cout << arr.size() << " dydzio listo rusiavimas pagal rezultatus uztruko " << diff.count() << " sekundziu\n";
 };
 void bufer_nusk2(std::string read_vardas, list<Student>& arr)
 {
