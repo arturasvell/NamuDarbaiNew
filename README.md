@@ -18,23 +18,7 @@ Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasir
 - **v1.0** Optimizuotas skaitymas, testuojamos dvi strategijos
 
 **REZULTATAI**
-*Failų skaitymas*
-|Failo dydis/būdas|Vector|List|Deque|
-|---|---|---|---|
-|1000|0.0236s|0.0238s|0.0237s|
-|10000|0.231s|0.237s|0.238s|
-|100000|2.33s|2.39s|2.40s|
-|1000000|23.89s|24.14s|24.29s|
-|10000000|239.54s|244.74s|245.259s|
 
-*Failų rūšiavimas*
-|Failo dydis/būdas|Vector|List|Deque|
-|---|---|---|---|
-|1000|0.017s|0.002s|0.018s|
-|10000|0.135s|0.029s|0.1419s|
-|100000|1.267s|0.337s|1.444s|
-|1000000|13.76s|3.84s|14.81s|
-|10000000|149.65s|42.73s|158.042s|
 Nauji rezultatai - [zip failas su screenshotais](uzd1_0.zip)
 # Kaip naudotis programa
 - Pasirinkti, ar generuoti failus, ar skaityti esamus failus
