@@ -35,6 +35,7 @@ Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasir
 |100000|1.267s|0.337s|1.444s|
 |1000000|13.76s|3.84s|14.81s|
 |10000000|149.65s|42.73s|158.042s|
+Nauji rezultatai - [zip failas su screenshotais](uzd1_0.zip)
 # Kaip naudotis programa
 - Pasirinkti, ar generuoti failus, ar skaityti esamus failus
 - Pasirinkti, kiek failų skaityti
