@@ -245,6 +245,7 @@ void Program()
         cout << "-----------------------------\n";
         arr.clear();
         best.clear();
+        worst.clear();
         counter *= 10;
     }
     counter=1000;
@@ -280,6 +281,7 @@ void Program()
         cout << "-----------------------------\n";
         arr2.clear();
         best2.clear();
+        worst2.clear();
         counter *= 10;
     }
     counter=1000;
@@ -317,6 +319,7 @@ void Program()
         cout << "-----------------------------\n";
         arr3.clear();
         best3.clear();
+        worst3.clear();
         counter *= 10;
     }
     MODE=false;
@@ -353,6 +356,7 @@ void Program()
         cout << "-----------------------------\n";
         arr.clear();
         best.clear();
+        worst.clear();
         counter *= 10;
     }
     counter=1000;
@@ -388,6 +392,7 @@ void Program()
         cout << "-----------------------------\n";
         arr2.clear();
         best2.clear();
+        worst2.clear();
         counter *= 10;
     }
     counter=1000;
@@ -425,6 +430,7 @@ void Program()
         cout << "-----------------------------\n";
         arr3.clear();
         best3.clear();
+        worst3.clear();
         counter *= 10;
     }
 }
