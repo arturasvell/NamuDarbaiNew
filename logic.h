@@ -24,7 +24,14 @@ enum Method
 	LIST,
 	DEQUE
 };
-class Student
+class Person
+{
+protected:
+    string name="", surname="";
+public:
+    virtual void DisplayNameSurname()=0;
+};
+class Student:Person
 {
 public:
 	string name = "", surname = "";
