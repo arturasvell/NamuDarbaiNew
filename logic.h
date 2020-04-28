@@ -59,6 +59,28 @@ public:
 	{
 		return a.final < b.final;
 	}
+	Student operator + (Student &a)
+	{
+        if(a.name==this->name&&a.surname==this->surname)
+        {
+            this->final=(a.final+this->final)/2.0;
+            delete &a;
+            return *this;
+        }
+	}
+	Student operator - (Student &a)
+	{
+        if(a.name==this->name&&a.surname==this->surname)
+        {
+            this->final=(abs)(a.final-this->final)/2.0;
+            delete &a;
+            return *this;
+        }
+	}
+	float operator / (Student const& a, Student const& b) const
+	{
+        return a.final/b.final;
+	}
 };
 Student* AddInfo(deque<Student> arr);
 
