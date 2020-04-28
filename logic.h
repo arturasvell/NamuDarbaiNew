@@ -24,7 +24,14 @@ enum Method
 	LIST,
 	DEQUE
 };
-class Student
+class Person
+{
+protected:
+    string name="", surname="";
+public:
+    virtual void DisplayNameSurname()=0;
+};
+class Student:Person
 {
 public:
 	string name = "", surname = "";
@@ -39,7 +46,10 @@ public:
 	void CountFinal(double data, double examResult);
 
 	void Print();
-
+    void DisplayNameSurname()
+    {
+        cout<<name<<" "<<surname<<endl;
+    }
 	Student()
 	{
 		name = "Vardenis";
@@ -59,27 +69,27 @@ public:
 	{
 		return a.final < b.final;
 	}
-	Student operator + (Student &a)
+	Student* operator + (Student &a)
 	{
         if(a.name==this->name&&a.surname==this->surname)
         {
             this->final=(a.final+this->final)/2.0;
             delete &a;
-            return *this;
+            return this;
         }
 	}
-	Student operator - (Student &a)
+	Student* operator - (Student &a)
 	{
         if(a.name==this->name&&a.surname==this->surname)
         {
             this->final=(abs)(a.final-this->final)/2.0;
             delete &a;
-            return *this;
+            return this;
         }
 	}
-	float operator / (Student const& a, Student const& b) const
+	float operator / (Student const& a)
 	{
-        return a.final/b.final;
+        return this->final/a.final;
 	}
 };
 Student* AddInfo(deque<Student> arr);
