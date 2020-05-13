@@ -33,12 +33,27 @@ public:
 };
 class Student:Person
 {
+protected:
+    string name = "", surname = "";
+    double final;
 public:
-	string name = "", surname = "";
 
 	string Name() { return name; }
 	string Surname() { return surname; }
-	double final;
+	double Final(){return final;}
+	void setName(string name)
+	{
+        this->name=name;
+	}
+	void setSurname(string surname)
+	{
+        this->surname=surname;
+	}
+	void setFinal(double final)
+	{
+        this->final=final;
+	}
+
 	double CountAverage(vector<int> homework);
 
 	double CountMedian(vector<int> homework);
@@ -46,9 +61,17 @@ public:
 	void CountFinal(double data, double examResult);
 
 	void Print();
-    void DisplayNameSurname()
+
+    void DisplayNameSurname();
+    ~Student()
     {
-        cout<<name<<" "<<surname<<endl;
+        delete this;
+    }
+    Student(const Student &s1)
+    {
+        this->name=s1.name;
+        this->surname=s1.surname;
+        this->final=s1.final;
     }
 	Student()
 	{
@@ -90,6 +113,12 @@ public:
 	float operator / (Student const& a)
 	{
         return this->final/a.final;
+	}
+	Student& operator = (Student other)
+	{
+        swap(this->name,other.name);
+        swap(this->surname,other.surname);
+        swap(this->final,other.final);
 	}
 };
 Student* AddInfo(deque<Student> arr);
