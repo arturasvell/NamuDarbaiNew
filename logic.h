@@ -34,7 +34,6 @@ public:
 class Student:Person
 {
 protected:
-    string name = "", surname = "";
     double final;
 public:
 
