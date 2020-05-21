@@ -18,6 +18,7 @@ Iš šių duomenų programa apskaičiuoja **medianą** arba **vidurkį** (*pasir
 - **v1.0** Optimizuotas skaitymas, testuojamos dvi strategijos
 - **v1.1.1** Visi testai daromi vienu metu, prie makefile pridėta optimizavimo vėliavėlė
 - **v1.5** Student klasė išskirstyta į dvi
+- **2.0** Sukurtas Doxygen katalogas, implementuotas GoogleTest (žiūrėti link'ą)
 
 **REZULTATAI**
 
